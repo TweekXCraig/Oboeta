@@ -4,7 +4,7 @@ class GUI:
     def __init__(self):
         # Create the main window and set its title
         self.root = tk.Tk()
-        self.root.title("GUI Example")
+        self.root.title("Oboeta")
 
         # Set the background color of the window to black
         self.root.configure(bg="black")
@@ -43,6 +43,10 @@ class GUI:
         # Start the main event loop
         self.root.mainloop()
 
+
 # Create an instance of the GUI and run it
+manager = ExcelManager("D:\Oboeta Git\Oboeta\B1.xlsx")
 gui = GUI()
+print(manager.get_data())
 gui.run()
+
