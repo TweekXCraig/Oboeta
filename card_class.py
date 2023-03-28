@@ -51,6 +51,7 @@ class Card:
             return 9999999999
         else:
             print("level data not int between 0 and 12. fix!?")
+            print(self.level)
             return 91919191919191
 
     def b_is_due(self):

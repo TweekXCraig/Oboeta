@@ -49,5 +49,14 @@ class GUI:
 # Create an instance of the GUI and run it
 manager = ExcelManager("D:\Oboeta Git\Oboeta\B1.xlsx")
 gui = GUI()
-print(manager.get_data())
+print(manager.fill_bus())
+
+
+def bus_test():
+    for card in manager.bus:
+        print(card.A)
+
+
+bus_test()
+print("among us")
 gui.run()

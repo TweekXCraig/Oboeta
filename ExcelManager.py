@@ -3,6 +3,14 @@ from card_class import Card
 import time
 
 
+def row_data_to_card(data):
+    if len(data) == 7:
+        card = Card(data)
+        return card
+    else:
+        return None
+
+
 class ExcelManager:
 
     def __init__(self, filename):
@@ -17,48 +25,35 @@ class ExcelManager:
         row_data = []
         for cell in self.sheet[row_num][:6]:
             row_data.append(cell.value)
-        if len(row_data) == 5:
+        if row_data[0] is None:
+            return 1
+        elif len(row_data) == 5:
             row_data.append(time.time())
         # checks of too little info is given, returns none if that's the case
         elif len(row_data) < 5:
             print("not enough cells used in line ", row_num)
-            return None
+            return 1
         # checks if too much info is given, returns none if that's the case
         elif len(row_data) > 6:
             print("too many cells used in line ", row_num)
-            return None
+            return 1
         row_data.append(row_num)
-        print(len(row_data))
+        print(row_data)
+        print(self.bus)
         return row_data
 
-    @staticmethod
-    def row_data_to_card(data):
-        if len(data) == 7:
-            card = Card(data)
-            return card
-        else:
-            return None
-
-    def get_data(self):
-        data = []
+    def fill_bus(self):
+        ToFill = self.busLength - len(self.bus)
         b_is_going = True
-        line = self.currentLine
-        while b_is_going:
-
-            value = self.sheet.cell(line, 1).value
-            if value:
-                # print(value)
-                data.append(self.get_row_data(line))
+        while ToFill > 0 and b_is_going:
+            if not self.get_row_data(self.currentLine) == 1:
+                card = row_data_to_card(self.get_row_data(self.currentLine))
+                if card.b_is_due():
+                    self.currentLine += 1
+                    self.bus.append(card)
+                    ToFill -= 1
             else:
-                print("ended at line:", line)
-                print(value)
                 b_is_going = False
-
-            if len(data) > 10:
-                b_is_going = False
-            line += 1
-        self.currentLine = line
-        return data
 
     def fill_row(self, card):
 
