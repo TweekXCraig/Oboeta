@@ -4,6 +4,8 @@ from ExcelManager import ExcelManager
 
 class GUI:
     def __init__(self):
+        self.manager = ExcelManager("D:\Oboeta Git\Oboeta\B1.xlsx")
+        self.manager.fill_bus()
         # Create the main window and set its title
         self.root = tk.Tk()
         self.root.title("Oboeta")
@@ -36,6 +38,10 @@ class GUI:
         self.output_field = tk.Label(self.root, text="", fg="white", bg="black", font=("Helvetica", 18))
         self.output_field.pack(pady=20)
 
+        # Create a button to close the program
+        self.close_button = tk.Button(self.root, text="Close", command=self.close)
+        self.close_button.pack(pady=20)
+
     # Define a method to be called when the user presses Enter in the input field
     def submit_text(self, event):
         text = self.input_field.get()
@@ -45,19 +51,12 @@ class GUI:
         # Start the main event loop
         self.root.mainloop()
 
+    def close(self):
+        self.manager.save_bus()
+        self.root.destroy()
+
 
 # Create an instance of the GUI and run it
-manager = ExcelManager("D:\Oboeta Git\Oboeta\B1.xlsx")
 gui = GUI()
-print(manager.fill_bus())
 
-
-def bus_test():
-    for card in manager.bus:
-        print(card.A)
-
-
-bus_test()
-#print("among us")
-print(manager.save_bus())
 gui.run()
