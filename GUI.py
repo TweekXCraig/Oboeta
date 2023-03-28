@@ -1,5 +1,7 @@
 import tkinter as tk
 from ExcelManager import ExcelManager
+
+
 class GUI:
     def __init__(self):
         # Create the main window and set its title
@@ -49,4 +51,3 @@ manager = ExcelManager("D:\Oboeta Git\Oboeta\B1.xlsx")
 gui = GUI()
 print(manager.get_data())
 gui.run()
-
