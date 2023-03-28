@@ -58,5 +58,6 @@ def bus_test():
 
 
 bus_test()
-print("among us")
+#print("among us")
+print(manager.save_bus())
 gui.run()

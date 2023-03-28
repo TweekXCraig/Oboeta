@@ -21,7 +21,7 @@ class Card:
                 self.level = self.level + 1
 
     def get_values_to_save(self):
-        values = [self.level, self.A, self.B, self.extra, self.extraC, self.lastRevision]
+        values = [ self.A, self.B, self.extra, self.extraC, self.level, self.lastRevision]
         return values
 
     def get_time_by_level(self):

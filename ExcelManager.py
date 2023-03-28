@@ -62,3 +62,8 @@ class ExcelManager:
             cell.value = value
 
         self.workbook.save(self.filename)
+
+    def save_bus(self):
+        for card in self.bus:
+            self.fill_row(card)
+        return True
