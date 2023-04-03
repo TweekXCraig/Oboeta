@@ -4,7 +4,7 @@ from ExcelManager import ExcelManager
 
 class GUI:
     def __init__(self):
-        self.manager = ExcelManager("D:\Oboeta Git\Oboeta\B1.xlsx")
+        self.manager = ExcelManager("D:\Projekte\Oboeta\B1.xlsx")
         self.manager.fill_bus()
         # Create the main window and set its title
         self.root = tk.Tk()
