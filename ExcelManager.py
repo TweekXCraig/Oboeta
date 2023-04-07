@@ -25,12 +25,13 @@ class ExcelManager:
 
     def get_row_data(self, row_num):
         row_data = []
-        for cell in self.sheet[row_num][:6]:
+        for cell in self.sheet[row_num][:7]:
             row_data.append(cell.value)
         if row_data[0] is None:
             return 1
-        elif len(row_data) == 6:
-            row_data.append(time.time())
+        #elif len(row_data) == 6:
+
+            #row_data.append(time.time())
         # checks of too little info is given, returns none if that's the case
         elif len(row_data) < 6:
             print("not enough cells used in line ", row_num)
@@ -69,17 +70,27 @@ class ExcelManager:
 
     def save_bus(self):
         for card in self.bus:
+            print(card.A)
             self.fill_row(card)
         return True
 
     def get_current_card(self):
-        return self.bus[0]
+        if len(self.bus) == 0:
+            print("bus is empty")
+            return None
+        else:
+            return self.bus[0]
 
     def check_input(self, input):
+        self.currentCard.update_last_revision()
         if input == self.currentCard.B:
-            if len(self.bus) > 1:
+            self.currentCard.level_up()
+            self.fill_row(self.currentCard)
+
+            if len(self.bus) > 0:
                 self.bus.pop(0)
                 self.currentCard = self.get_current_card()
             return True
         else:
+            self.currentCard.reset_level()
             return False

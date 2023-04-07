@@ -45,9 +45,13 @@ class GUI:
     # Define a method to be called when the user presses "Enter" in the input field
     def submit_text(self, event):
         text = self.input_field.get()
+        self.input_field.delete(0, tk.END)
         if self.manager.check_input(text):
-            self.text_label.config(text = self.manager.currentCard.get_to_test())
-            
+            if self.manager.currentCard:
+
+                self.text_label.config(text = self.manager.currentCard.get_to_test())
+            else:
+                self.close()
         else:
             print(self.manager.currentCard.B)
             self.output_field.config(text=self.manager.currentCard.B)

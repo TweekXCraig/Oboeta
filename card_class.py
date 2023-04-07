@@ -27,6 +27,7 @@ class Card:
         return test
 
     def get_values_to_save(self):
+        print("card:" + self.A +"Level:" + str(self.level))
         values = [self.A, self.Addon, self.B, self.extra, self.extraC, self.level, self.lastRevision]
         return values
 
@@ -65,7 +66,23 @@ class Card:
         if due_date <= time.time():
             return True
         elif due_date >= time.time():
+            print("Card:", self.A, "\nDueDate:" , due_date, " " + str(time.time()),"\nRemainder:" + str(due_date - time.time()))
             return False
         else:
             print("card_class -> b_is_due() calculation did not work :)")
             return None
+
+    def level_up(self):
+        self.level = self.level + 1
+        if self.level > 12:
+            self.level = 12
+        return self.level
+
+    def reset_level(self):
+        self.level = 1
+        print("card:",self.A,"    level reset to 1")
+        return
+
+    def update_last_revision(self):
+        self.lastRevision = time.time()
+        return
