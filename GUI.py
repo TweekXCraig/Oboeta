@@ -5,9 +5,9 @@ from ExcelManager import ExcelManager
 class GUI:
     def __init__(self):
         self.manager = ExcelManager("D:\Projekte\Oboeta\B1.xlsx")
-        self.manager.fill_bus()
+
         # Create the main window and set its title
-        self.root = tk.Tk()
+        self.root = tk.Tk() 
         self.root.title("Oboeta")
 
         # Set the background color of the window to black
@@ -25,7 +25,7 @@ class GUI:
         self.root.geometry("%dx%d+%d+%d" % (window_width, window_height, x_pos, y_pos))
 
         # Create the text label and input field
-        self.text_label = tk.Label(self.root, text="Enter some text:", fg="white", bg="black", font=("Helvetica", 24))
+        self.text_label = tk.Label(self.root, text=self.manager.currentCard.get_to_test(), fg="white", bg="black", font=("Helvetica", 24))
         self.text_label.pack(pady=(50, 20))
 
         self.input_field = tk.Entry(self.root, bg="gray", fg="white", font=("Helvetica", 18))
@@ -42,10 +42,15 @@ class GUI:
         self.close_button = tk.Button(self.root, text="Close", command=self.close)
         self.close_button.pack(pady=20)
 
-    # Define a method to be called when the user presses Enter in the input field
+    # Define a method to be called when the user presses "Enter" in the input field
     def submit_text(self, event):
         text = self.input_field.get()
-        self.output_field.config(text=text)
+        if self.manager.check_input(text):
+            self.text_label.config(text = self.manager.currentCard.get_to_test())
+            
+        else:
+            print(self.manager.currentCard.B)
+            self.output_field.config(text=self.manager.currentCard.B)
 
     def run(self):
         # Start the main event loop

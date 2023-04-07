@@ -5,12 +5,14 @@ class Card:
     def __init__(self, values):
 
         self.A = values[0]
-        self.B = values[1]
-        self.extra = values[2]
-        self.extraC = values[3]
-        self.level = values[4]
-        self.lastRevision = values[5]
-        self.saveLine = values[6]
+        self.Addon = values[1]
+        self.B = values[2]
+        self.extra = values[3]
+        self.extraC = values[4]
+        self.level = values[5]
+        self.lastRevision = values[6]
+        self.saveLine = values[7]
+        print("A:", self.A)
 
     def update(self, b_was_right):
         self.lastRevision = time.time()
@@ -20,8 +22,12 @@ class Card:
             if self.level > 1:
                 self.level = self.level + 1
 
+    def get_to_test(self):
+        test = self.A + " (" + self.Addon + ")"
+        return test
+
     def get_values_to_save(self):
-        values = [ self.A, self.B, self.extra, self.extraC, self.level, self.lastRevision]
+        values = [self.A, self.Addon, self.B, self.extra, self.extraC, self.level, self.lastRevision]
         return values
 
     def get_time_by_level(self):
@@ -63,6 +69,3 @@ class Card:
         else:
             print("card_class -> b_is_due() calculation did not work :)")
             return None
-
-
-
