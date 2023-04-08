@@ -29,9 +29,8 @@ class ExcelManager:
             row_data.append(cell.value)
         if row_data[0] is None:
             return 1
-        #elif len(row_data) == 6:
-
-            #row_data.append(time.time())
+        elif len(row_data) == 6:
+            row_data.append(time.time())
         # checks of too little info is given, returns none if that's the case
         elif len(row_data) < 6:
             print("not enough cells used in line ", row_num)
